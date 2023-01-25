@@ -86,25 +86,36 @@ table {
 
 .profile-banner {
 	position: relative;
-	display: flex;
-	align-items: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	padding: 20px;
+	background-color: #000;
+	height: 280px;
+	margin-top: 25px;
 }
 
-.profile-banner::after {
-	content: "";
+.profile-banner-image {
+	opacity: 0.5;
 	position: absolute;
 	top: 0;
-	right: 0;
-	left: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
+	left: 0;
+	right: 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.profile-banner-content {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	padding: 20px;
 }
 
 .profile-banner-name {
 	font-size: 20pt;
 	font-weight: 700;
 	margin-left: 50px;
+	color: #fff;
 }
