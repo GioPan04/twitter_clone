@@ -19,7 +19,7 @@ session_start();
     <div class="posts-list">
 
       <?php
-      $posts = get_posts($db);
+      $posts = isset($_SESSION['user']) ? get_followed_posts($_SESSION['user']['id']) : get_posts();
       while($row = $posts->fetch_assoc()) {
         include "components/post.php";
       }

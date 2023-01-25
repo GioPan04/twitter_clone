@@ -22,7 +22,7 @@ if(!$user) {
   exit();
 }
 
-if($_SESSION['user']) {
+if(isset($_SESSION['user'])) {
   $following = $db->query("SELECT COUNT(*) as following FROM follows WHERE follower_id = {$_SESSION['user']['id']} AND followed_id = {$user['id']}")->fetch_array()['following'];
 }
 
@@ -48,10 +48,12 @@ if($_SESSION['user']) {
           <span class="profile-banner-name"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></span>
           <span>@<?php echo $user['username'] ?></span>
         </div>
-        <form action="user.php" method="post">
-          <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>"/>
-          <input type="submit" value="<?php echo $following ? "UNFOLLOW" : "FOLLOW" ?>"/>
-        </form>
+        <?php if(isset($following)): ?>
+          <form action="user.php" method="post">
+            <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>"/>
+            <input type="submit" value="<?php echo $following ? "UNFOLLOW" : "FOLLOW" ?>"/>
+          </form>
+        <?php endif; ?>
       </div>
     </div>
 
