@@ -1,0 +1,33 @@
+
+services:
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/html
+      - ./php/config.ini:/usr/local/etc/php/conf.d/my.ini:ro
+    depends_on:
+      - mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOST=mysql
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=twitter_clone
+    volumes:
+      - ./mysql:/var/lib/mysql
+  
