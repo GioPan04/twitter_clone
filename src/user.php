@@ -28,7 +28,10 @@ session_start();
       <div class="profile-banner-image" style="background-image: url('https://picsum.photos/1000/200')"></div>
       <div class="profile-banner-content">
         <img class="avatar" src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user['email']))) ?>?s=256" alt=""/>
-        <span class="profile-banner-name"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></span>
+        <div class="profile-banner-info">
+          <span class="profile-banner-name"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></span>
+          <span>@<?php echo $user['username'] ?></span>
+        </div>
       </div>
     </div>
 

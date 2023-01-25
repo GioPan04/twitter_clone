@@ -113,9 +113,15 @@ table {
 	padding: 20px;
 }
 
-.profile-banner-name {
-	font-size: 20pt;
-	font-weight: 700;
-	margin-left: 50px;
+.profile-banner-info {
 	color: #fff;
+	margin-left: 50px;
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-banner-name {
+	font-weight: 700;
+	font-size: 20pt;
+	margin-bottom: 5px;
 }
