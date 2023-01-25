@@ -5,7 +5,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $user = login($db, $username, $password);
+  $user = login($username, $password);
 
   if($user) {
     session_start();

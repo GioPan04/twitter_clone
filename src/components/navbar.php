@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <span>Twitter</span>
+  <a href="/">Twitter</a>
 
   <?php if(isset($_SESSION['user'])) : ?>
     <div>

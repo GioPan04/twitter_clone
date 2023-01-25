@@ -26,9 +26,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <?php include "components/navbar.php"; ?>
-  <form action="write.php" method="POST">
-    <textarea name="content" cols="30" rows="10" placeholder="What are you thinking about?"></textarea>
-    <input type="submit" value="POST"/>
-  </form>
+  
+  <div class="content">
+    <form action="write.php" method="POST">
+      <textarea name="content" cols="30" rows="10" placeholder="What are you thinking about?"></textarea>
+      <input type="submit" value="POST"/>
+    </form>
+  </div>
 </body>
 </html>
