@@ -16,12 +16,15 @@ session_start();
   <?php include "components/navbar.php" ?>
   <div class="content">
 
-    <?php
+    <div class="posts-list">
+
+      <?php
       $posts = get_posts($db);
       while($row = $posts->fetch_assoc()) {
         include "components/post.php";
       }
-    ?>
+      ?>
+    </div>
   </div>
 </body>
 </html>
