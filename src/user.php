@@ -1,5 +1,18 @@
 <?php
 include "lib/db.php";
+include "lib/follow.php";
+session_start();
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user'])) {
+  $follower = $_SESSION['user']['id'];
+  $followed = $_POST['user_id'];
+
+  toggle_follow($follower, $followed);
+
+  $user = $db->query("SELECT username FROM users WHERE id = $followed")->fetch_array();
+  header('Location: user.php?u='.$user['username']);
+  exit();
+}
 
 $username = $_GET['u'];
 $user = $db->query("SELECT id, username, first_name, last_name, email FROM users WHERE username = '$username'")->fetch_array();
@@ -9,7 +22,10 @@ if(!$user) {
   exit();
 }
 
-session_start();
+if($_SESSION['user']) {
+  $following = $db->query("SELECT COUNT(*) as following FROM follows WHERE follower_id = {$_SESSION['user']['id']} AND followed_id = {$user['id']}")->fetch_array()['following'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +48,10 @@ session_start();
           <span class="profile-banner-name"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></span>
           <span>@<?php echo $user['username'] ?></span>
         </div>
+        <form action="user.php" method="post">
+          <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>"/>
+          <input type="submit" value="<?php echo $following ? "UNFOLLOW" : "FOLLOW" ?>"/>
+        </form>
       </div>
     </div>
 
