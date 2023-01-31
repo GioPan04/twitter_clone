@@ -1,0 +1,149 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: 'Lato', sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+.navbar {
+  background-color: #ADD8E6;
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-actions a {
+  margin-left: 10px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.content {
+  max-width: 1024px;
+  margin: 30px auto;
+}
+
+.posts-list > .post {
+	margin-top: 20px;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+}
+
+.post-author-username {
+	padding-left: 5px;
+	font-size: 12pt;
+}
+
+.post .post-content {
+  display: block;
+  font-size: 16pt;
+  margin: 10px 0;
+}
+
+.grayed {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.profile-banner {
+	position: relative;
+	background-color: #000;
+	height: 280px;
+	margin-top: 25px;
+}
+
+.profile-banner-image {
+	opacity: 0.5;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.profile-banner-content {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+}
+
+.profile-banner-info {
+	color: #fff;
+	margin-left: 50px;
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-banner-name {
+	font-weight: 700;
+	font-size: 20pt;
+	margin-bottom: 5px;
+}
+
+.friends-list {
+	display: flex;
+}
+
+.friends-list .friend {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
