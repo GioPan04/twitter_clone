@@ -22,6 +22,8 @@ if(!$user) {
   exit();
 }
 
+$followers = $db->query("SELECT COUNT(*) as count FROM follows WHERE followed_id = " . $user['id'])->fetch_array();
+
 if(isset($_SESSION['user'])) {
   $following = $db->query("SELECT COUNT(*) as following FROM follows WHERE follower_id = {$_SESSION['user']['id']} AND followed_id = {$user['id']}")->fetch_array()['following'];
 }
@@ -39,7 +41,6 @@ if(isset($_SESSION['user'])) {
 <body>
   <?php include "components/navbar.php"; ?>
   <div class="content">
-
     <div class="profile-banner">
       <div class="profile-banner-image" style="background-image: url('https://picsum.photos/1000/200')"></div>
       <div class="profile-banner-content">
@@ -47,13 +48,14 @@ if(isset($_SESSION['user'])) {
         <div class="profile-banner-info">
           <span class="profile-banner-name"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?></span>
           <span>@<?php echo $user['username'] ?></span>
+          <span><?php echo $followers['count'] ?> followers</span>
+          <?php if(isset($following)): ?>
+            <form action="user.php" method="post">
+              <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>"/>
+              <input type="submit" value="<?php echo $following ? "UNFOLLOW" : "FOLLOW" ?>"/>
+            </form>
+          <?php endif; ?>
         </div>
-        <?php if(isset($following)): ?>
-          <form action="user.php" method="post">
-            <input type="hidden" name="user_id" value="<?php echo $user['id'] ?>"/>
-            <input type="submit" value="<?php echo $following ? "UNFOLLOW" : "FOLLOW" ?>"/>
-          </form>
-        <?php endif; ?>
       </div>
     </div>
 

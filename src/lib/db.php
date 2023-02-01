@@ -1,3 +1,3 @@
 <?php
 
-$db = new mysqli("mysql", "root", "root", "twitter_clone");
+$db = new mysqli("127.0.0.1", "root", "", "twitter_clone");
