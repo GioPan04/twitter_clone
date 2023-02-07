@@ -1,6 +1,7 @@
 <?php
 include "lib/db.php";
 include "lib/follow.php";
+include "lib/posts.php";
 session_start();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user'])) {
@@ -26,6 +27,9 @@ $followers = $db->query("SELECT COUNT(*) as count FROM follows WHERE followed_id
 
 if(isset($_SESSION['user'])) {
   $following = $db->query("SELECT COUNT(*) as following FROM follows WHERE follower_id = {$_SESSION['user']['id']} AND followed_id = {$user['id']}")->fetch_array()['following'];
+  $posts = get_user_posts($user['id'], $_SESSION['user']['id']);
+} else {
+  $posts = get_user_posts($user['id'], null);
 }
 
 ?>
@@ -36,6 +40,7 @@ if(isset($_SESSION['user'])) {
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="/static/style.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <title>Profilo di <?php echo $user['username'] ?></title>
 </head>
 <body>
@@ -61,8 +66,6 @@ if(isset($_SESSION['user'])) {
 
     <div class="posts-list">
       <?php 
-      include "lib/posts.php";
-      $posts = get_user_posts($user['id']);
       
       while($row = $posts->fetch_array()) {
         include "components/post.php";

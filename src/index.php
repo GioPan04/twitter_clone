@@ -11,6 +11,7 @@ session_start();
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="static/style.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <title>Twitter clone</title>
 </head>
 <body>
@@ -18,13 +19,11 @@ session_start();
   <div class="content">
     <?php if(isset($_SESSION['user'])) : ?>
       <div>
-        <h3>Potresti conoscere</h3>
+        <h3 class="subtitle">Potresti conoscere</h3>
         <div class="friends-list">
           <?php
             $friends = get_friends($_SESSION['user']['id']);
-            while($user = $friends->fetch_assoc()) {
-              include "components/friend.php";
-            }
+            while($user = $friends->fetch_assoc()) include "components/friend.php";
           ?>
         </div>
       </div>

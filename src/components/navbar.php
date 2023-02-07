@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <a href="/">Twitter</a>
+  <a href="/"><img class="navbar-logo" src="/static/logo-white.png" alt="logo"></a>
 
   <?php if(isset($_SESSION['user'])) : ?>
     <div class="navbar-actions">

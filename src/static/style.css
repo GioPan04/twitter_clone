@@ -49,16 +49,29 @@ table {
 	--app-color: #1d9bf0;
 }
 
+.material-symbols-outlined {
+	font-variation-settings:
+	'FILL' 0,
+	'wght' 400,
+	'GRAD' 0,
+	'opsz' 48
+}
+
 body {
 	background-color: rgb(243, 244, 246);
 }
 
 .navbar {
-  background-color: #ADD8E6;
-  padding: 10px 10px;
+  background-color: var(--app-color);
+  color: #fff;
+  padding: 5px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.navbar-logo {
+	width: 60px;
 }
 
 .navbar-actions {
@@ -68,6 +81,8 @@ body {
 
 .navbar-actions a {
   margin-left: 10px;
+  color: #fff;
+  text-decoration: none;
 }
 
 .avatar {
@@ -147,6 +162,7 @@ body {
 
 .friends-list {
 	display: flex;
+	overflow-x: auto;
 }
 
 .friends-list .friend {
@@ -154,6 +170,16 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	text-align: center;
+	min-width: max-content;
+}
+
+.friend-name {
+	margin-top: 5px;
+}
+
+.friend-tag {
+	margin-top: 3px;
 }
 
 body.center {
@@ -214,4 +240,24 @@ body.center {
 	background-color: var(--app-color);
 	border: none;
 	color: #fff;
+}
+
+.subtitle {
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.post-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.post-actions {
+	display: flex;
+	align-items: center;
+}
+
+.icon-liked {
+	color: #f00;
+	font-variation-settings: 'FILL' 1;
 }

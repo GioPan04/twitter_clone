@@ -30,5 +30,5 @@ function get_friends($user_id) {
     FROM follows a
     INNER JOIN follows b ON a.followed_id = b.follower_id
     INNER JOIN users u ON u.id = b.followed_id
-    WHERE a.follower_id = 3 AND b.followed_id <> a.follower_id");
+    WHERE a.follower_id = $user_id AND a.follower_id <> b.followed_id");
 }
