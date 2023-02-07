@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Jan 25, 2023 at 11:52 PM
--- Server version: 8.0.32
--- PHP Version: 8.0.19
+-- Host: 127.0.0.1
+-- Creato il: Feb 07, 2023 alle 10:06
+-- Versione del server: 10.4.18-MariaDB
+-- Versione PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,37 +24,57 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `follows`
+-- Struttura della tabella `follows`
 --
 
 CREATE TABLE `follows` (
-  `follower_id` int NOT NULL,
-  `followed_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `follower_id` int(11) NOT NULL,
+  `followed_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `follows`
+-- Dump dei dati per la tabella `follows`
 --
 
 INSERT INTO `follows` (`follower_id`, `followed_id`) VALUES
-(1, 2),
-(1, 3);
+(1, 3),
+(2, 1),
+(3, 2),
+(1, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Struttura della tabella `likes`
+--
+
+CREATE TABLE `likes` (
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `likes`
+--
+
+INSERT INTO `likes` (`user_id`, `post_id`) VALUES
+(2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `posts`
 --
 
 CREATE TABLE `posts` (
-  `id` int NOT NULL,
-  `author_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
   `content` varchar(128) NOT NULL,
   `posted_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `posts`
+-- Dump dei dati per la tabella `posts`
 --
 
 INSERT INTO `posts` (`id`, `author_id`, `content`, `posted_at`) VALUES
@@ -62,25 +82,27 @@ INSERT INTO `posts` (`id`, `author_id`, `content`, `posted_at`) VALUES
 (2, 1, 'idk', '2023-01-25 20:17:49'),
 (3, 2, 'aaaaaaaaaaaaa', '2023-01-25 20:51:37'),
 (4, 2, 'ldkfjsdlkfjskldjfklsd', '2023-01-25 23:44:07'),
-(5, 3, 'ldkjgdklgjdkljgdklfg', '2023-01-25 23:44:48');
+(5, 3, 'ldkjgdklgjdkljgdklfg', '2023-01-25 23:44:48'),
+(6, 1, 'Post di test', '2023-01-31 09:21:45'),
+(7, 1, 'cringe', '2023-02-07 08:51:07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struttura della tabella `users`
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(64) NOT NULL,
   `password` varchar(255) NOT NULL,
   `first_name` varchar(64) NOT NULL,
   `last_name` varchar(64) NOT NULL,
   `email` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Dump dei dati per la tabella `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
@@ -89,25 +111,32 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `e
 (3, 'pangio2', '$2y$10$xqomae8c0HNG9gMH0lvE9O6M3nd5ZsLk3ua9UXid8imSXWSQLjKb.', 'Gioele', 'Pannetto', 'gioele.pannetto@studenti.gobettivolta.edu.it');
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `follows`
+-- Indici per le tabelle `follows`
 --
 ALTER TABLE `follows`
   ADD KEY `follower_id` (`follower_id`),
   ADD KEY `followed_id` (`followed_id`);
 
 --
--- Indexes for table `posts`
+-- Indici per le tabelle `likes`
+--
+ALTER TABLE `likes`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
+-- Indici per le tabelle `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `author_id` (`author_id`);
 
 --
--- Indexes for table `users`
+-- Indici per le tabelle `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -115,37 +144,44 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT per la tabella `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `follows`
+-- Limiti per la tabella `follows`
 --
 ALTER TABLE `follows`
-  ADD CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`follower_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`followed_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`follower_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`followed_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `posts`
+-- Limiti per la tabella `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
+
+--
+-- Limiti per la tabella `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
